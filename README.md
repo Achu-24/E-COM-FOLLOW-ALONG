@@ -119,11 +119,11 @@ Data Validation & Integrity: Enforced strict validation to prevent invalid or in
 
 ## Milestone 11 :
 
-In this milestone, we:
+In this milestone, we: 
 
 Created an API endpoint to fetch all product data from MongoDB.
 Connected the frontend to retrieve this data dynamically.
 Used the existing product card component to display products.
 Ensured real-time updates by fetching data on page load.
-Improved the homepage by making product listings dynamic.
-Committed and pushed all changes to GitHub.
+Improved the homepage by making product listings dynamic .
+Committed and pushed all changes to GitHub .
