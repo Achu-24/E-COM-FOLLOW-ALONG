@@ -127,3 +127,17 @@ Used the existing product card component to display products.
 Ensured real-time updates by fetching data on page load.
 Improved the homepage by making product listings dynamic .
 Committed and pushed all changes to GitHub .
+
+
+## Milestone 12 :
+Created an endpoint in Express to fetch products from MongoDB filtered by the logged-in user's email.
+Implemented a frontend function to request and receive product data from the backend.
+Dynamically displayed the products using a previously created product card component.
+Updated the README file to document the progress and key implementations for this milestone.
+Pushed all changes to the GitHub repository and submitted the assignment link.
+
+
+
+
+
+
