@@ -121,12 +121,14 @@ Data Validation & Integrity: Enforced strict validation to prevent invalid or in
 
 In this milestone, we: 
 
+ mile11
 Created an API endpoint to fetch all product data from MongoDB.
 Connected the frontend to retrieve this data dynamically.
 Used the existing product card component to display products.
 Ensured real-time updates by fetching data on page load.
 Improved the homepage by making product listings dynamic .
 Committed and pushed all changes to GitHub .
+
 
 
 ## Milestone 12 :
@@ -150,6 +152,7 @@ Committed all changes to GitHub and updated the README with Milestone 13 progres
 
 
 
+
 ## Milestone 14:
 Created a backend endpoint in Express to delete a product by its ID from MongoDB.
 Used MongoDB’s findByIdAndDelete() method to remove the product.
@@ -159,6 +162,7 @@ Ensured that the product disappears from the UI after successful deletion.
 Tested the API using Postman or an API client.
 Committed the changes to GitHub and updated the README with Milestone 14 progress.
 Submitted the repository link as required.
+
 
 
 ## Milestone 15:
@@ -173,6 +177,9 @@ Added the Nav component to all pages for consistency.
 Used state management (if needed) for active link highlighting.
 Tested navigation to confirm smooth transitions.
 Committed all changes to GitHub and updated the README with Milestone 15 details.
+=======
+
+
 
 
 
