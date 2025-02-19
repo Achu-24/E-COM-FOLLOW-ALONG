@@ -106,7 +106,7 @@ Form Validation: Implemented validation to ensure required fields are filled cor
 State Management: Used React state to handle form inputs dynamically.
 Backend Integration: Connected the form to the backend API to store product details in the database.
 UI/UX Enhancements: Styled the form using Tailwind CSS for a clean and user-friendly design.
-This milestone improves the product management system by allowing users to add new products efficiently. 🚀
+This milestone improves the product management system by allowing users to add new products efficiently. 
 
 ## Milestone 10 :
 In this milestone, we focused on defining the structure of product data and creating an API endpoint to store product details in MongoDB.
@@ -163,6 +163,21 @@ Tested the API using Postman or an API client.
 Committed the changes to GitHub and updated the README with Milestone 14 progress.
 Submitted the repository link as required.
 
+
+
+## Milestone 15:
+Created a Nav component containing links to:
+=>Home
+=>My Products
+=>Add Product
+=>Cart
+Implemented React Router to enable seamless navigation between pages.
+Ensured responsiveness using CSS/Flexbox/Tailwind, making the navbar adapt to all screen sizes.
+Added the Nav component to all pages for consistency.
+Used state management (if needed) for active link highlighting.
+Tested navigation to confirm smooth transitions.
+Committed all changes to GitHub and updated the README with Milestone 15 details.
+=======
 
 
 
