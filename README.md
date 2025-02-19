@@ -106,7 +106,7 @@ Form Validation: Implemented validation to ensure required fields are filled cor
 State Management: Used React state to handle form inputs dynamically.
 Backend Integration: Connected the form to the backend API to store product details in the database.
 UI/UX Enhancements: Styled the form using Tailwind CSS for a clean and user-friendly design.
-This milestone improves the product management system by allowing users to add new products efficiently. 🚀
+This milestone improves the product management system by allowing users to add new products efficiently. 
 
 ## Milestone 10 :
 In this milestone, we focused on defining the structure of product data and creating an API endpoint to store product details in MongoDB.
@@ -137,6 +137,42 @@ Updated the README file to document the progress and key implementations for thi
 Pushed all changes to the GitHub repository and submitted the assignment link.
 
 
+## Milestone 13:
+
+Created a backend endpoint in Express to update a product by its ID in MongoDB.
+Used MongoDB’s findByIdAndUpdate() method to modify the product details.
+Added an Edit button to each product card in the frontend UI.
+When the button is clicked, the existing product details are auto-filled into a form.
+Allowed users to modify and save the updated details.
+Sent a PUT request to update the product in the database.
+Ensured the updated product details appear in the UI after a successful update.
+Committed all changes to GitHub and updated the README with Milestone 13 progress.
+
+
+
+## Milestone 14:
+Created a backend endpoint in Express to delete a product by its ID from MongoDB.
+Used MongoDB’s findByIdAndDelete() method to remove the product.
+Updated the frontend UI by adding a Delete button to each product card.
+When the button is clicked, it sends a DELETE request to the backend with the product ID.
+Ensured that the product disappears from the UI after successful deletion.
+Tested the API using Postman or an API client.
+Committed the changes to GitHub and updated the README with Milestone 14 progress.
+Submitted the repository link as required.
+
+
+## Milestone 15:
+Created a Nav component containing links to:
+=>Home
+=>My Products
+=>Add Product
+=>Cart
+Implemented React Router to enable seamless navigation between pages.
+Ensured responsiveness using CSS/Flexbox/Tailwind, making the navbar adapt to all screen sizes.
+Added the Nav component to all pages for consistency.
+Used state management (if needed) for active link highlighting.
+Tested navigation to confirm smooth transitions.
+Committed all changes to GitHub and updated the README with Milestone 15 details.
 
 
 
