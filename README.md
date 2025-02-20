@@ -174,6 +174,19 @@ Used state management (if needed) for active link highlighting.
 Tested navigation to confirm smooth transitions.
 Committed all changes to GitHub and updated the README with Milestone 15 details.
 
+---
+
+# Milestone 16: Product Info Page
+
+## 📌 Overview
+This milestone focuses on creating a **product info page** that displays detailed product information, allows users to select a quantity, and includes an **Add to Cart** button.
+
+## 🚀 Learning Objectives
+By completing this milestone, we have learned:
+- How to create a new page to display product details.
+- How to implement a quantity selector.
+- How to add an "Add to Cart" button to update the cart.
+
 
 
 

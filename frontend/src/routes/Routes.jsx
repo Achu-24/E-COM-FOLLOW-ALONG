@@ -4,10 +4,10 @@ import Home from "../pages/Home.jsx";
 import createproduct from "../pages/CreateProduct.jsx";
 import myproducts from "../pages/myproducts.jsx";
 import cart from "../pages/cart.jsx";
-// import productdetails from "../pages/productdetails.jsx";
+import productDetails from "../pages/productDetails.jsx";
 
 
 
 
 
-export{ LoginPage, Signup , Home ,createproduct,myproducts,cart}
+export{ LoginPage, Signup , Home ,createproduct,myproducts,cart,productDetails}
