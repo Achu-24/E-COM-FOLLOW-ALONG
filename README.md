@@ -194,6 +194,12 @@ By completing this milestone, we have learned:
 - How to implement a quantity selector.
 - How to add an "Add to Cart" button to update the cart.
 
+- # Milestone 17:
+
+- Update **user schema** to store cart products.  
+- Create an **API endpoint** to add products to the cart.  
+- Push code to **GitHub**, update **README**, and submitted  the **repo link**. 
+
 
 
 
