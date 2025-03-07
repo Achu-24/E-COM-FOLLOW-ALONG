@@ -216,6 +216,16 @@ By completing this milestone, we have learned:
 - Ensured **database updates** when quantity changes.  
 - Improved **user experience** with interactive controls.  
 
+# Milestone 20: Profile Page & User Data Endpoint  
+
+- Created a **backend API** to send user data via email.  
+- Designed a **frontend profile page** to display user details.  
+- Showcased **profile photo, name, and email** in one section.  
+- Displayed **address details** separately with an "Add Address" button.  
+- Handled **empty addresses** with a "No address found" message.  
+- Integrated **frontend with backend API** for dynamic updates.  
+- Ensured **responsive UI** for better user experience.  
+ 
 
 
  
