@@ -206,6 +206,18 @@ By completing this milestone, we have learned:
 - Retrieve cart items using **user email**.  
 - Push code to **GitHub**, update **README**, and submit the **repo link**.  
 
+# Milestone 19: Cart Page & Quantity Management  
+
+- Created a **Cart Page UI** displaying products.  
+- Added `+` and `-` buttons to update product quantity.  
+- Implemented **state management** for dynamic updates.  
+- Built backend **API endpoints** for quantity changes.  
+- Connected **frontend with backend** for real-time updates.  
+- Ensured **database updates** when quantity changes.  
+- Improved **user experience** with interactive controls.  
+
+
+
  
 
 
