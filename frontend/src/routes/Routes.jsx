@@ -5,9 +5,10 @@ import createproduct from "../pages/CreateProduct.jsx";
 import myproducts from "../pages/myproducts.jsx";
 import cart from "../pages/cart.jsx";
 import productDetails from "../pages/productDetails.jsx";
+import createAddress from "../pages/createAddress.jsx";
 
 
 
 
 
-export{ LoginPage, Signup , Home ,createproduct,myproducts,cart,productDetails}
+export{ LoginPage, Signup , Home ,createproduct,myproducts,cart,productDetails,createAddress}

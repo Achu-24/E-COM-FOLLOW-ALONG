@@ -232,6 +232,17 @@ By completing this milestone, we have learned:
 - Ensured **responsive UI** for better user experience.  
  
 
+# Milestone 21: Address Form Frontend
+
+1. Created a frontend form for address input.
+2. The form collects details like country, city, address1, address2, zip code, and address type.
+3. Implemented state management to store input address data.
+4. Ensured navigation from the profile page to the address form when clicking "Add Address."
+5. Designed a user-friendly layout for easy input and submission.
+6. Updated the README file with progress details for Milestone 21.
+7. Pushed the code to a public GitHub repository for submission.
+8. Submitted the repository link as per the assignment guidelines.
+
 
  
 ---
