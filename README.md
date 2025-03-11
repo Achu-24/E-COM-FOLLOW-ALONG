@@ -244,6 +244,21 @@ By completing this milestone, we have learned:
 8. Submitted the repository link as per the assignment guidelines.
 
 
+
+ # Milestone 22: Backend Endpoint for Address Storage  
+
+
+
+1. **Objective:** Create a backend endpoint to store user addresses in the database.  
+2. **Backend Development:** Implement an API route to receive address data from the frontend form.  
+3. **Database Integration:** Store the address inside the `user` collection as an array.  
+4. **Request Handling:** Ensure proper validation and handling of incoming address data.  
+5. **Data Persistence:** Use MongoDB (with Mongoose) to update user profiles efficiently.  
+6. **API Testing:** Verify functionality using tools like Postman.  
+7. **GitHub Submission:** Push code to a public repository and update README with progress.  
+8. **Learning Outcome:** Understand how to create and integrate backend endpoints for user data storage.  
+
+
  
 ---
 
