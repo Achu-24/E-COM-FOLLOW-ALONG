@@ -283,7 +283,15 @@ In this milestone, you'll create a backend endpoint to handle placing orders.
 The endpoint will receive product, user, and address details and retrieve the user's `_id` using their email.  
 Each product will have a unique order, but with the same address.  
 You will store the order details in the MongoDB order collection using the order schema.  
-Push your code to GitHub and update your README with progress.
+
+
+## Milestone 26 
+
+- Create a backend endpoint to retrieve all orders for a user.
+- Extract the user's email to fetch their user ID.
+- Use the user ID to fetch all orders associated with that user.
+- Return the user's orders in the response.
+
 
 
 
