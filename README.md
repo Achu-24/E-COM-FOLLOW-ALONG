@@ -194,11 +194,16 @@ By completing this milestone, we have learned:
 - How to implement a quantity selector.
 - How to add an "Add to Cart" button to update the cart.
 
+
 # Milestone 17:
+
+- # Milestone 17:
+
 
 - Update **user schema** to store cart products.  
 - Create an **API endpoint** to add products to the cart.  
 - Push code to **GitHub**, update **README**, and submitted  the **repo link**. 
+
 
 # 🚀 Milestone 18: Cart Page Backend  
 
@@ -237,6 +242,7 @@ By completing this milestone, we have learned:
 6. Updated the README file with progress details for Milestone 21.
 7. Pushed the code to a public GitHub repository for submission.
 8. Submitted the repository link as per the assignment guidelines.
+
 
 
  # Milestone 22: Backend Endpoint for Address Storage  
@@ -279,8 +285,7 @@ By completing this milestone, we have learned:
 
 
 
-
-
+ 
 
 
 
