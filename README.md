@@ -283,6 +283,15 @@ By completing this milestone, we have learned:
 - Push your code to GitHub and submit the repository link.
 - Implement the final step in the place order functionality.
 
+## Milestone 25: Placing an Order - Backend Endpoint
+
+In this milestone, you'll create a backend endpoint to handle placing orders.  
+The endpoint will receive product, user, and address details and retrieve the user's `_id` using their email.  
+Each product will have a unique order, but with the same address.  
+You will store the order details in the MongoDB order collection using the order schema.  
+Push your code to GitHub and update your README with progress.
+
+
 
 
  
