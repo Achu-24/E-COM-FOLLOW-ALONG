@@ -256,11 +256,36 @@ By completing this milestone, we have learned:
 5. **Data Persistence:** Use MongoDB (with Mongoose) to update user profiles efficiently.  
 6. **API Testing:** Verify functionality using tools like Postman.  
 7. **GitHub Submission:** Push code to a public repository and update README with progress.  
-8. **Learning Outcome:** Understand how to create and integrate backend endpoints for user data storage.  
+8. **Learning Outcome:** Understand how to create and integrate backend endpoints for user data storage. 
+
+
+
+# Milestone 23: Implementing Place Order Feature
+
+- Add a "Place Order" button inside the cart page.
+- Navigate to a select address page upon clicking the button.
+- Display all user addresses on the select address page.
+- Allow users to choose a delivery address.
+- Create a backend endpoint to retrieve all user addresses.
+- Write a Mongoose schema to store order details.
+- Update the README file with your progress.
+
+
+# Milestone 24: Implementing Order Confirmation Page
+
+
+
+- Create an order confirmation page that displays the products being ordered.
+- Show the address selected for delivery.
+- Display the total value of the cart.
+- Add a "Place Order" button at the bottom of the page.
+- Update the README file with your progress.
+- Push your code to GitHub and submit the repository link.
+- Implement the final step in the place order functionality.
+
 
 
  
----
 
 
 

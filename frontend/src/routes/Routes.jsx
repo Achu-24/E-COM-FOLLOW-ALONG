@@ -6,9 +6,11 @@ import myproducts from "../pages/myproducts.jsx";
 import cart from "../pages/cart.jsx";
 import productDetails from "../pages/productDetails.jsx";
 import createAddress from "../pages/createAddress.jsx";
+import selectaddress from "../pages/selectaddress.jsx";
+import OrderConfirmation from "../pages/orderconfirmation.jsx";
 
 
 
 
 
-export{ LoginPage, Signup , Home ,createproduct,myproducts,cart,productDetails,createAddress}
+export{ LoginPage, Signup , Home ,createproduct,myproducts,cart,productDetails,createAddress,selectaddress,OrderConfirmation}
