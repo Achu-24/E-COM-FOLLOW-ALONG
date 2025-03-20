@@ -293,6 +293,14 @@ You will store the order details in the MongoDB order collection using the order
 - Return the user's orders in the response.
 
 
+## Milestone 27 
+
+
+- Sending a GET request to the `my-orders` endpoint with the user's email.
+- Displaying the user’s orders on the frontend page.
+- Adding the "my-orders" page to the navigation bar for easier access.
+
+
 
 
 
