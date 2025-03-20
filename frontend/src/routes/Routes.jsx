@@ -8,9 +8,10 @@ import productDetails from "../pages/productDetails.jsx";
 import createAddress from "../pages/createAddress.jsx";
 import selectaddress from "../pages/selectaddress.jsx";
 import OrderConfirmation from "../pages/orderconfirmation.jsx";
+import myorders from "../pages/myorders.jsx";
 
 
 
 
 
-export{ LoginPage, Signup , Home ,createproduct,myproducts,cart,productDetails,createAddress,selectaddress,OrderConfirmation}
+export{ LoginPage, Signup , Home ,createproduct,myproducts,cart,productDetails,createAddress,selectaddress,OrderConfirmation,myorders}
