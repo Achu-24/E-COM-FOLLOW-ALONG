@@ -308,6 +308,17 @@ You will store the order details in the MongoDB order collection using the order
 
 
 
+## Milestone 28:
+  ## Cancel Order Feature
+
+## Overview
+In this milestone, we implemented the functionality to cancel placed orders. A cancel button was added to the **My Orders** page, and a backend endpoint was created to update the order status.
+
+## Tasks Completed
+Added a **Cancel Order** button for each order in **My Orders**.
+Ensured the cancel button is not displayed for already canceled orders.
+Created a backend endpoint to receive the **order ID** and update the order status to **canceled**.
+Implemented logic to fetch and update the order in the database.
 
 
  

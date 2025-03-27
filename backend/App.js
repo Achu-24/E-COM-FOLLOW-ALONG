@@ -6,9 +6,9 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const ErrorHandler = require("./middleware/error");
-const userRoutes = require("./controller/user");
-const productRoutes = require('./controller/product');
- const orders = require('./controller/orders');
+// const userRoutes = require("./controller/user");
+// const productRoutes = require('./controller/product');
+ const orders = require('./controller/order');
 
 const app = express();
 
@@ -34,8 +34,8 @@ const userRoutes = require("./controller/user");
 const productRoutes = require('./controller/product');
 
 // Route Handling
-app.use("/api/v2/user", userRoutes);
-app.use("/api/v2/product", productRoutes);
+// app.use("/api/v2/user", userRoutes);
+// app.use("/api/v2/product", productRoutes);
 app.use("/api/v2/user", userRoutes);
 app.use("/api/v2/product", productRoutes);
  app.use("/api/v2/orders", orders);

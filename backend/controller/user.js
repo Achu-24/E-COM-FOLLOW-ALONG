@@ -1,130 +1,123 @@
-/* eslint-disable no-constant-binary-expression */
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from "react";
-import AddressCard from "../components/AddressCard";
-import Nav from "../components/nav";
-import { useNavigate } from "react-router-dom";
-export default function Profile() {
-    const [personalDetails, setPersonalDetails] = useState({
-        name: "",
-        email: "",
-        phoneNumber: "",
-        avatarUrl: "",
-    });
+const express = require("express");
+const path = require("path");
+const fs = require("fs");
+const User = require("../model/user");
+const router = express.Router();
+const { upload } = require("../multer");
+const ErrorHandler = require("../utils/ErrorHandler");
+const catchAsyncErrors = require("../middleware/catchAsyncErrors");
+const bcrypt = require("bcryptjs");
+require("dotenv").config();
 
-    const [addresses, setAddresses] = useState([]);
-    const navigate = useNavigate();
-    useEffect(() => {
-        fetch(
-            `http://localhost:8000/api/v2/user/profile?email=${"hamsha@gmail.com"}`,
-            {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+
+router.post("/create-user", upload.single("file"), catchAsyncErrors(async (req, res, next) => {
+    console.log("Creating user...");
+    const { name, email, password } = req.body;
+
+    const userEmail = await User.findOne({ email });
+    if (userEmail) {
+        if (req.file) {
+            const filepath = path.join(__dirname, "../uploads", req.file.filename);
+            try {
+                fs.unlinkSync(filepath);
+            } catch (err) {
+                console.log("Error removing file:", err);
+                return res.status(500).json({ message: "Error removing file" });
             }
-        )
-            .then((res) => {
-                // if (!res.ok) {
-                //  throw new Error(`HTTP error! status: ${res.status}`);
-                // }
-                return res.json();
-            })
-            .then((data) => {
-                setPersonalDetails(data.user);
-                setAddresses(data.addresses);
-                console.log("User fetched:", data.user);
-                console.log("Addresses fetched:", data.addresses);
-            })
-            .catch((err) => console.log("Fetch error:", err));;
-    }, []);
+        }
+        return next(new ErrorHandler("User already exists", 400));
+    }
 
-    const handleAddAddress = () => {
-        navigate("/create-address");
+    let fileUrl = "";
+    if (req.file) {
+        fileUrl = path.join("uploads", req.file.filename);
+    }
+    const hashedPassword = await bcrypt.hash(password, 10);
+    console.log("At Create ", "Password: ", password, "Hash: ", hashedPassword);
+    const user = await User.create({
+        name,
+        email,
+        password: hashedPassword,
+        avatar: {
+            public_id: req.file?.filename || "",
+            url: fileUrl,
+        },
+    });
+    console.log(user)
+    res.status(201).json({ success: true, user });
+}));
+
+router.post("/login", catchAsyncErrors(async (req, res, next) => {
+    console.log("Logging in user...");
+    const { email, password } = req.body;
+    if (!email || !password) {
+        return next(new ErrorHandler("Please provide email and password", 400));
+    }
+    const user = await User.findOne({ email }).select("+password");
+    if (!user) {
+        return next(new ErrorHandler("Invalid Email or Password", 401));
+    }
+    const isPasswordMatched = await bcrypt.compare(password, user.password);
+    console.log("At Auth", "Password: ", password, "Hash: ", user.password);
+    if (!isPasswordMatched) {
+        return next(new ErrorHandler("Invalid Email or Password", 401));
+    }
+    user.password = undefined;
+    res.status(200).json({
+        success: true,
+        user,
+    });
+}));
+
+router.get("/profile", catchAsyncErrors(async (req, res, next) => {
+    const { email } = req.query;
+    console.log(req.query.email)
+    if (!email) {
+        return next(new ErrorHandler("Please provide an email", 400));
+    }
+    const user = await User.findOne({ email });
+    if (!user) {
+        return next(new ErrorHandler("User not found", 404));
+    }
+    res.status(200).json({
+        success: true,
+        user: {
+            name: user.name,
+            email: user.email,
+            phoneNumber: user.phoneNumber,
+            avatarUrl: user.avatar.url
+        },
+        addresses: user.addresses,
+    });
+}));
+
+router.post("/add-address", catchAsyncErrors(async (req, res, next) => {
+    const { country, city, address1, address2, zipCode, addressType, email } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+        return next(new ErrorHandler("User not found", 404));
+    }
+
+    const newAddress = {
+        country,
+        city,
+        address1,
+        address2,
+        zipCode,
+        addressType,
     };
 
-    return (
-        <>
-            <Nav />
-            <div className="w-full min-h-screen bg-neutral-800 p-5">
-                <div className="w-full h-full bg-neutral-700 rounded-lg">
-                    <div className="w-full h-max my-2 p-5">
-                        <div className="w-full h-max">
-                            <h1 className="text-3xl text-neutral-100">
-                                Personal Details
-                            </h1>
-                        </div>
-                        <div className="w-full h-max flex flex-col sm:flex-row p-5 gap-10">
-                            <div className="w-40 h-max flex flex-col justify-center items-center gap-y-3">
-                                <div className="w-full h-max text-2xl text-neutral-100 text-left">
-                                    PICTURE
-                                </div>
-                                <img
-                                    src={`http://localhost:8000/${personalDetails.avatarUrl}` || `https://cdn.vectorstock.com/i/500p/17/61/male-avatar-profile-picture-vector-10211761.jpg`}
-                                    alt="profile"
-                                    className="w-40 h-40 rounded-full"
-                                    onError={(e) => {
-                                        e.target.onerror = null; // Prevents infinite loop if the default image also fails
-                                        e.target.src = `https://cdn.vectorstock.com/i/500p/17/61/male-avatar-profile-picture-vector-10211761.jpg`;
-                                    }}
-                                />
-                            </div>
-                            <div className="h-max md:flex-grow">
-                                <div className="w-full h-max flex flex-col justify-center items-center gap-y-3">
-                                    <div className="w-full h-max">
-                                        <div className="text-2xl text-neutral-100 text-left">
-                                            NAME
-                                        </div>
-                                        <div className="text-lg font-light text-neutral-100 text-left break-all">
-                                            {personalDetails.name}
-                                        </div>
-                                    </div>
-                                    <div className="w-full h-max">
-                                        <div className="text-2xl text-neutral-100 text-left">
-                                            EMAIL
-                                        </div>
-                                        <div className="text-lg font-light text-neutral-100 text-left break-all">
-                                            {personalDetails.email}
-                                        </div>
-                                    </div>
-                                    <div className="w-full h-max">
-                                        <div className="text-2xl text-neutral-100 text-left">
-                                            MOBILE
-                                        </div>
-                                        <div className="text-lg font-light text-neutral-100 text-left break-all">
-                                            {personalDetails.phoneNumber}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="w-full h-max my-2 p-5">
-                        <div className="w-full h-max">
-                            <h1 className="text-3xl text-neutral-100">
-                                Addresses
-                            </h1>
-                        </div>
-                        <div className="w-full h-max p-5">
-                            <button className="w-max px-3 py-2 bg-neutral-600 text-neutral-100 rounded-md text-center hover:bg-neutral-100 hover:text-black transition-all duration-100"
-                            onClick={handleAddAddress}
-                            >
-                                Add Address
-                            </button>
-                        </div>
-                        <div className="w-full h-max flex flex-col gap-5 p-5">
-                            {addresses.length === 0 ? (
-                                <div className="w-full h-max text-neutral-100 font-light text-left">
-                                    No Addresses Found
-                                </div>
-                            ) : null}
-                            {addresses.map((address, index) => (
-                                <AddressCard key={index} {...address} />
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </>
-    );
-}
+    user.addresses.push(newAddress);
+    await user.save();
+
+    res.status(201).json({
+        success: true,
+        addresses: user.addresses,
+    });
+}));
+
+
+
+module.exports = router;
