@@ -302,6 +302,16 @@ You will store the order details in the MongoDB order collection using the order
 
 
 
+## Milestone 28: Adding Order Cancellation
+# Follow-along Project: Online Bookstore - 
+
+## Learning Goals 🎯
+
+By the end of this milestone, users will be able to cancel their placed orders through the "My Orders" page.
+
+## Implementation Details 📝
+
+This milestone focuses on adding the functionality to cancel existing orders.
 
 
 
