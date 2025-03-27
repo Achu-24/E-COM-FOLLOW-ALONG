@@ -322,6 +322,14 @@ Implemented logic to fetch and update the order in the database.
 
 
  
+### Milestone 29 
+## Summary: Adding PayPal Payment Gateway
+
+- In this milestone, you will learn how to integrate PayPal API into your application for online payments.
+- First, create a PayPal developer account and access the sandbox for testing.
+- Copy the UserID and ClientID from the sandbox accounts for future use.
+- On the order confirmation page, add radio buttons for COD (Cash on Delivery) and online payment options.
+- When selecting online payment, display PayPal buttons for users to complete the transaction.
 
 
 
