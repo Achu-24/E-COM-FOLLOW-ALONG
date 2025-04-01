@@ -342,3 +342,12 @@ Responsive Design: Used CSS Flexbox and media queries to ensure adaptability acr
 
 
 
+# Milestone 31 Summary - Global State Management with Redux
+
+1. **Redux Introduction**: Learn how to use Redux for global state management in a React application.  
+2. **Installation**: Install `react-redux` using npm to enable global state management.  
+3. **Folder Structure**: Create a `store` folder containing `store.js` and `userActions.js`.  
+4. **State Management**: Store the user's email globally using a Redux store.  
+5. **Reducer Setup**: Configure `store.js` with a `userReducer` to handle the email state.  
+6. **Action Creation**: Define `setEmail` in `userActions.js` to update the global state.  
+7. **Provider Setup**: Wrap the `App` component inside a `Provider` in `index.js` with the store as a prop.  
