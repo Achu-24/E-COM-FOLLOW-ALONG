@@ -350,10 +350,19 @@ Responsive Design: Used CSS Flexbox and media queries to ensure adaptability acr
 4. **State Management**: Store the user's email globally using a Redux store.  
 5. **Reducer Setup**: Configure `store.js` with a `userReducer` to handle the email state.  
 6. **Action Creation**: Define `setEmail` in `userActions.js` to update the global state.  
-7. **Provider Setup**: Wrap the `App` component inside a `Provider` in `index.js` with the store as a prop.  
+7. **Provider Setup**: Wrap the `App` component inside a `Provider` in `index.js` with the store as a prop.
+
 
 ### Milestone 32: Using Redux for Global State Management  
 
 1. **Storing Email in Global State** - Use Redux `dispatch` in the login page to store the email globally.  
 2. **Accessing Email Across Pages** - Retrieve the stored email using `useSelector` in other pages.  
-3. **State Management with Redux** - Understand how Redux helps manage global state efficiently.  
+3. **State Management with Redux** - Understand how Redux helps manage global state efficiently.
+
+### Milestone 33: Creating and Storing JWT Tokens  
+
+1. **Installing jsonwebtoken** - Use NPM to install the `jsonwebtoken` package.  
+2. **Generating JWT Tokens** - Use the `sign` method to create a JWT with email and ID.  
+3. **Setting Expiry** - Define `maxAge` to specify the token's expiration time.  
+4. **Storing in Cookies** - Add the token to the response to store it in the browser.  
+
