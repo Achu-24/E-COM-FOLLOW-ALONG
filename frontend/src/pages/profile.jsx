@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import AddressCard from "../components/AddressCard";
 import Nav from "../components/nav";
+import { useSelector } from 'react-redux'; // Import useSelector
 
 
 export default function Profile() {
@@ -15,11 +16,13 @@ export default function Profile() {
 
 
     const [addresses, setAddresses] = useState([]);
+        const userEmail = useSelector((state) => state.user.email);
+    
 
 
     useEffect(() => {
         fetch(
-            `http://localhost:8000/api/v2/user/profile?email=${"hamsha@gmail.com"}`,
+            `http://localhost:8000/api/v2/user/profile?email=${userEmail}`,
             {
                 method: "GET",
                 headers: {

@@ -351,3 +351,9 @@ Responsive Design: Used CSS Flexbox and media queries to ensure adaptability acr
 5. **Reducer Setup**: Configure `store.js` with a `userReducer` to handle the email state.  
 6. **Action Creation**: Define `setEmail` in `userActions.js` to update the global state.  
 7. **Provider Setup**: Wrap the `App` component inside a `Provider` in `index.js` with the store as a prop.  
+
+### Milestone 32: Using Redux for Global State Management  
+
+1. **Storing Email in Global State** - Use Redux `dispatch` in the login page to store the email globally.  
+2. **Accessing Email Across Pages** - Retrieve the stored email using `useSelector` in other pages.  
+3. **State Management with Redux** - Understand how Redux helps manage global state efficiently.  
