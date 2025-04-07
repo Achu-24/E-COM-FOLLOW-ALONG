@@ -3,10 +3,16 @@
 import React, { useEffect, useState } from "react";
 import AddressCard from "../components/AddressCard";
 import Nav from "../components/nav";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux'; // Import useSelector
+import axios from "../axios.config";
+
+
 
 
 export default function Profile() {
+      // Retrieve email from Redux state
+    const userEmail = useSelector((state) => state.user.email);
     const [personalDetails, setPersonalDetails] = useState({
         name: "",
         email: "",
@@ -16,13 +22,12 @@ export default function Profile() {
 
 
     const [addresses, setAddresses] = useState([]);
-        const userEmail = useSelector((state) => state.user.email);
-    
+    const navigate = useNavigate();
 
 
     useEffect(() => {
-        fetch(
-            `http://localhost:8000/api/v2/user/profile?email=${userEmail}`,
+        axios.get(
+            `/api/v2/user/profile?email=${userEmail}`,
             {
                 method: "GET",
                 headers: {
@@ -44,6 +49,9 @@ export default function Profile() {
             })
             .catch((err) => console.log("Fetch error:", err));;
     }, []);
+    const handleAddAddress = () => {
+        navigate("/create-address");
+    };
     return (
         <>
             <Nav />
@@ -107,7 +115,7 @@ export default function Profile() {
                             </h1>
                         </div>
                         <div className="w-full h-max p-5">
-                            <button className="w-max px-3 py-2 bg-neutral-600 text-neutral-100 rounded-md text-center hover:bg-neutral-100 hover:text-black transition-all duration-100">
+                            <button  onClick={handleAddAddress} className="w-max px-3 py-2 bg-neutral-600 text-neutral-100 rounded-md text-center hover:bg-neutral-100 hover:text-black transition-all duration-100">
                                 Add Address
                             </button>
                         </div>
@@ -127,7 +135,3 @@ export default function Profile() {
         </>
     );
 }
-
-
-
-

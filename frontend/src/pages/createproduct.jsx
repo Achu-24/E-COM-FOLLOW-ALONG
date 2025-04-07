@@ -1,188 +1,269 @@
 /* eslint-disable no-unused-vars */
-// src/components/NavBar.jsx
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { AiOutlinePlusCircle } from "react-icons/ai";
+// import axios from "axios";
+import axios from "../axios.config";
 
 
-const NavBar = () => {
-    const [isOpen, setIsOpen] = useState(false);
+import { useParams, useNavigate } from "react-router-dom";
+import Nav from "../components/nav";
+const CreateProduct = () => {
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const isEdit = Boolean(id);
 
 
-    const toggleMenu = () => {
-        setIsOpen(!isOpen);
+    const [images, setImages] = useState([]);
+    const [previewImages, setPreviewImages] = useState([]);
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [category, setCategory] = useState("");
+    const [tags, setTags] = useState("");
+    const [price, setPrice] = useState("");
+    const [stock, setStock] = useState("");
+    const [email, setEmail] = useState("");
+
+
+    const categoriesData = [
+        { title: "Electronics" },
+        { title: "Fashion" },
+        { title: "Books" },
+        { title: "Home Appliances" },
+    ];
+
+
+    useEffect(() => {
+        if (isEdit) {
+            axios
+                .get(`/api/v2/product/${id}`)
+                .then((response) => {
+                    const p = response.data.product;
+                    setName(p.name);
+                    setDescription(p.description);
+                    setCategory(p.category);
+                    setTags(p.tags || "");
+                    setPrice(p.price);
+                    setStock(p.stock);
+                    setEmail(p.email);
+                    if (p.images && p.images.length > 0) {
+                        setPreviewImages(
+                            p.images.map((imgPath) => `http://localhost:8000${imgPath}`)
+                        );
+                    }
+                })
+                .catch((err) => {
+                    console.error("Error fetching product:", err);
+                });
+        }
+    }, [id, isEdit]);
+
+
+    const handleImagesChange = (e) => {
+        const files = Array.from(e.target.files);
+        setImages((prevImages) => prevImages.concat(files));
+        const imagePreviews = files.map((file) => URL.createObjectURL(file));
+        setPreviewImages((prevPreviews) => prevPreviews.concat(imagePreviews));
+    };
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("name", name);
+        formData.append("description", description);
+        formData.append("category", category);
+        formData.append("tags", tags);
+        formData.append("price", price);
+        formData.append("stock", stock);
+        formData.append("email", email);
+
+
+        images.forEach((image) => {
+            formData.append("images", image);
+        });
+
+
+        try {
+            if (isEdit) {
+                const response = await axios.put(
+                    `/api/v2/product/update-product/${id}`,
+                    formData,
+                    {
+                        headers: { "Content-Type": "multipart/form-data" },
+                    }
+                );
+                if (response.status === 200) {
+                    alert("Product updated successfully!");
+                    navigate("/my-products");
+                }
+            } else {
+                const response = await axios.post(
+                    "/api/v2/product/create-product",
+                    formData,
+                    {
+                        headers: { "Content-Type": "multipart/form-data" },
+                    }
+                );
+                if (response.status === 201) {
+                    alert("Product created successfully!");
+                    setImages([]);
+                    setPreviewImages([]);
+                    setName("");
+                    setDescription("");
+                    setCategory("");
+                    setTags("");
+                    setPrice("");
+                    setStock("");
+                    setEmail("");
+                }
+            }
+        } catch (err) {
+            console.error("Error creating/updating product:", err);
+            alert("Failed to save product. Please check the data and try again.");
+        }
     };
 
 
     return (
-        <nav className="bg-blue-600">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between h-16">
-                    {/* Hamburger Menu Button (visible on mobile) */}
-                    <div className="flex items-center md:hidden">
-                        <button
-                            onClick={toggleMenu}
-                            type="button"
-                            className="text-gray-200 hover:text-white focus:outline-none focus:text-white"
-                            aria-controls="mobile-menu"
-                            aria-expanded={isOpen}
-                        >
-                            <span className="sr-only">Open main menu</span>
-                            {!isOpen ? (
-                                <svg
-                                    className="h-6 w-6"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M4 6h16M4 12h16M4 18h16"
-                                    />
-                                </svg>
-                            ) : (
-                                // Close Icon
-                                <svg
-                                    className="h-6 w-6"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
-                            )}
-                        </button>
-                    </div>
-
-
-                    <div className="hidden md:flex md:items-center md:justify-center w-full">
-                        <ul className="flex space-x-6">
-                            <li>
-                                <NavLink
-                                    to="/"
-                                    end
-                                    className={({ isActive }) =>
-                                        isActive
-                                            ? "text-white font-semibold px-3 py-2 rounded-md text-sm transition-colors duration-200"
-                                            : "text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm transition-colors duration-200"
-                                    }
-                                >
-                                    Home
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink
-                                    to="/my-products"
-                                    className={({ isActive }) =>
-                                        isActive
-                                            ? "text-white font-semibold px-3 py-2 rounded-md text-sm transition-colors duration-200"
-                                            : "text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm transition-colors duration-200"
-                                    }
-                                >
-                                    My Products
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink
-                                    to="/create-product"
-                                    className={({ isActive }) =>
-                                        isActive
-                                            ? "text-white font-semibold px-3 py-2 rounded-md text-sm transition-colors duration-200"
-                                            : "text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm transition-colors duration-200"
-                                    }
-                                >
-                                    Add Products
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink
-                                    to="/cart"
-                                    className={({ isActive }) =>
-                                        isActive
-                                            ? "text-white font-semibold px-3 py-2 rounded-md text-sm transition-colors duration-200"
-                                            : "text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm transition-colors duration-200"
-                                    }
-                                >
-                                    Cart
-                                </NavLink>
-                            </li>
-                        </ul>
+        <>
+      <Nav/>
+        <div className="w-[90%] max-w-[500px] bg-white shadow h-auto rounded-[4px] p-4 mx-auto">
+            <h5 className="text-[24px] font-semibold text-center">
+                {isEdit ? "Edit Product" : "Create Product"}
+            </h5>
+            <form onSubmit={handleSubmit}>
+                <div className="mt-4">
+                    <label className="pb-1 block">
+                        Email <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                        type="email"
+                        value={email}
+                        className="w-full p-2 border rounded"
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter your email"
+                        required
+                    />
+                </div>
+                <div>
+                    <label className="pb-1 block">
+                        Name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        value={name}
+                        className="w-full p-2 border rounded"
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="Enter product name"
+                        required
+                    />
+                </div>
+                <div className="mt-4">
+                    <label className="pb-1 block">
+                        Description <span className="text-red-500">*</span>
+                    </label>
+                    <textarea
+                        value={description}
+                        className="w-full p-2 border rounded"
+                        onChange={(e) => setDescription(e.target.value)}
+                        placeholder="Enter product description"
+                        rows="4"
+                        required
+                    ></textarea>
+                </div>
+                <div className="mt-4">
+                    <label className="pb-1 block">
+                        Category <span className="text-red-500">*</span>
+                    </label>
+                    <select
+                        className="w-full p-2 border rounded"
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                        required
+                    >
+                        <option value="">Choose a category</option>
+                        {categoriesData.map((i) => (
+                            <option value={i.title} key={i.title}>
+                                {i.title}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div className="mt-4">
+                    <label className="pb-1 block">Tags</label>
+                    <input
+                        type="text"
+                        value={tags}
+                        className="w-full p-2 border rounded"
+                        onChange={(e) => setTags(e.target.value)}
+                        placeholder="Enter product tags"
+                    />
+                </div>
+                <div className="mt-4">
+                    <label className="pb-1 block">
+                        Price <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                        type="number"
+                        value={price}
+                        className="w-full p-2 border rounded"
+                        onChange={(e) => setPrice(e.target.value)}
+                        placeholder="Enter product price"
+                        required
+                    />
+                </div>
+                <div className="mt-4">
+                    <label className="pb-1 block">
+                        Stock <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                        type="number"
+                        value={stock}
+                        className="w-full p-2 border rounded"
+                        onChange={(e) => setStock(e.target.value)}
+                        placeholder="Enter stock quantity"
+                        required
+                    />
+                </div>
+                <div className="mt-4">
+                    <label className="pb-1 block">
+                        {isEdit ? "Upload New Images (optional)" : "Upload Images"}{" "}
+                        <span className={isEdit ? "" : "text-red-500"}>*</span>
+                    </label>
+                    <input
+                        name="image"
+                        type="file"
+                        id="upload"
+                        className="hidden"
+                        multiple
+                        onChange={handleImagesChange}
+                        required={!isEdit}
+                    />
+                    <label htmlFor="upload" className="cursor-pointer">
+                        <AiOutlinePlusCircle size={30} color="#555" />
+                    </label>
+                    <div className="flex flex-wrap mt-2">
+                        {previewImages.map((img, index) => (
+                            <img
+                                src={img}
+                                key={index}
+                                alt="Preview"
+                                className="w-[100px] h-[100px] object-cover m-2"
+                            />
+                        ))}
                     </div>
                 </div>
-            </div>
-
-
-            {/* Mobile Menu */}
-            {isOpen && (
-                <div className="md:hidden" id="mobile-menu">
-                    <ul className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                        <li>
-                            <NavLink
-                                to="/"
-                                end
-                                className={({ isActive }) =>
-                                    isActive
-                                        ? "block text-white font-semibold px-3 py-2 rounded-md text-base transition-colors duration-200"
-                                        : "block text-gray-200 hover:text-white px-3 py-2 rounded-md text-base transition-colors duration-200"
-                                }
-                                onClick={() => setIsOpen(false)} // Close menu on link click
-                            >
-                                Home
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to="/myproducts"
-                                className={({ isActive }) =>
-                                    isActive
-                                        ? "block text-white font-semibold px-3 py-2 rounded-md text-base transition-colors duration-200"
-                                        : "block text-gray-200 hover:text-white px-3 py-2 rounded-md text-base transition-colors duration-200"
-                                }
-                                onClick={() => setIsOpen(false)}
-                            >
-                                My Products
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to="/addproducts"
-                                className={({ isActive }) =>
-                                    isActive
-                                        ? "block text-white font-semibold px-3 py-2 rounded-md text-base transition-colors duration-200"
-                                        : "block text-gray-200 hover:text-white px-3 py-2 rounded-md text-base transition-colors duration-200"
-                                }
-                                onClick={() => setIsOpen(false)}
-                            >
-                                Add Products
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to="/cart"
-                                className={({ isActive }) =>
-                                    isActive
-                                        ? "block text-white font-semibold px-3 py-2 rounded-md text-base transition-colors duration-200"
-                                        : "block text-gray-200 hover:text-white px-3 py-2 rounded-md text-base transition-colors duration-200"
-                                }
-                                onClick={() => setIsOpen(false)}
-                            >
-                                Cart
-                            </NavLink>
-                        </li>
-                    </ul>
-                </div>
-            )}
-        </nav>
+                <button
+                    type="submit"
+                    className="w-full mt-4 bg-blue-500 text-white p-2 rounded"
+                >
+                    {isEdit ? "Save Changes" : "Create"}
+                </button>
+            </form>
+        </div>
+        </>
     );
 };
 
 
-export default NavBar;
+export default CreateProduct;

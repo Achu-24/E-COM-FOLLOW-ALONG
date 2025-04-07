@@ -357,3 +357,20 @@ Responsive Design: Used CSS Flexbox and media queries to ensure adaptability acr
 1. **Storing Email in Global State** - Use Redux `dispatch` in the login page to store the email globally.  
 2. **Accessing Email Across Pages** - Retrieve the stored email using `useSelector` in other pages.  
 3. **State Management with Redux** - Understand how Redux helps manage global state efficiently.  
+
+
+### Milestone 33: Creating and Storing JWT Tokens  
+
+1. **Installing jsonwebtoken** - Use NPM to install the `jsonwebtoken` package.  
+2. **Generating JWT Tokens** - Use the `sign` method to create a JWT with email and ID.  
+3. **Setting Expiry** - Define `maxAge` to specify the token's expiration time.  
+4. **Storing in Cookies** - Add the token to the response to store it in the browser.  
+
+
+## 📝 Milestone 34 Summary
+
+- Learned how to extract the JWT token from cookies and send it to the server.
+- Implemented a middleware function in the backend to validate the received JWT token.
+- Ensured token validation happens on every protected page to prevent unauthorized access.
+- Pushed the updated code to GitHub with a clear README update.
+- This milestone strengthens understanding of secure authentication using JWT in full-stack apps.
