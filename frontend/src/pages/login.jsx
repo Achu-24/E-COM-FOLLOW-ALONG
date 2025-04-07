@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import styles from "../../styles/styles";
-import axios from "axios";
+// import axios from "axios";
+import axios from "../axios.config";
+
+
 import { useDispatch } from "react-redux";
 import { setemail } from "../../store/userActions";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
@@ -9,8 +12,16 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 
 
+
+
+
+
 // Ensure axios sends cookies with requests
 axios.defaults.withCredentials = true;
+
+
+
+
 
 
 
@@ -23,10 +34,12 @@ const Login = () => {
   const [visible, setVisible] = useState(false);
 
 
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8000/api/v2/user/login", { email, password });
+      const response = await axios.post("/api/v2/user/login", { email, password });
       console.log(response.data);
       // Dispatch action to store email in Redux state
       dispatch(setemail(email));
@@ -36,6 +49,8 @@ const Login = () => {
       console.error("There was an error logging in!", error);
     }
   };
+
+
 
 
   return (
@@ -64,6 +79,8 @@ const Login = () => {
                 />
               </div>
             </div>
+
+
 
 
             <div>
@@ -97,6 +114,8 @@ const Login = () => {
             </div>
 
 
+
+
             <div className={`${styles.noramlFlex} justify-between`}>
               <div className={`${styles.noramlFlex}`}>
                 <input
@@ -120,6 +139,8 @@ const Login = () => {
             </div>
 
 
+
+
             <div>
               <button
                 type="submit"
@@ -128,6 +149,8 @@ const Login = () => {
                 Submit
               </button>
             </div>
+
+
 
 
             <div className={`${styles.noramlFlex} w-full`}>
@@ -141,5 +164,6 @@ const Login = () => {
 };
 
 
-export default Login;
 
+
+export default Login;

@@ -9,6 +9,7 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const bcrypt = require("bcryptjs");
 require("dotenv").config();
 const jwt = require('jsonwebtoken')
+import { isAuthenticatedUser } from "../middleware/auth";
 
 router.post(
   "/create-user",
@@ -51,10 +52,6 @@ router.post(
   })
 );
 
-//importing jwt
-const jwt = require("jsonwebtoken");
-
-//login endpoint
 router.post(
   "/login",
   catchAsyncErrors(async (req, res, next) => {
@@ -107,7 +104,7 @@ router.post(
 
 router.get(
   "/profile",
-  catchAsyncErrors(async (req, res, next) => {
+  catchAsyncErrors(isAuthenticatedUser,async (req, res, next) => {
     const { email } = req.query;
     console.log(req.query.email);
     if (!email) {
@@ -132,7 +129,7 @@ router.get(
 
 router.post(
   "/add-address",
-  catchAsyncErrors(async (req, res, next) => {
+  catchAsyncErrors(isAuthenticatedUser,async (req, res, next) => {
     const { country, city, address1, address2, zipCode, addressType, email } =
       req.body;
 
@@ -155,6 +152,24 @@ router.post(
     await user.save();
 
     res.status(201).json({
+      success: true,
+      addresses: user.addresses,
+    });
+  })
+);
+
+router.get(
+  "/addresses",
+  catchAsyncErrors(isAuthenticatedUser,async (req, res, next) => {
+    const { email } = req.query;
+    if (!email) {
+      return next(new ErrorHandler("Please provide an email", 400));
+    }
+    const user = await User.findOne({ email });
+    if (!user) {
+      return next(new ErrorHandler("User not found", 404));
+    }
+    res.status(200).json({
       success: true,
       addresses: user.addresses,
     });

@@ -3,7 +3,10 @@ import { React, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { RxAvatar } from "react-icons/rx";
-import axios from "axios";
+// import axios from "axios";
+import axios from "../axios.config";
+
+
 import ValidationFormObject from "../../validation";
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -48,11 +51,14 @@ const Signup = () => {
       },
     };
 //axios request
-    axios.post("http://localhost:8000/api/v2/user/create-user", newForm, config).then((res)=>{
-      console.log(res.data);
+    axios.post("/api/v2/user/create-user", newForm, config).then((res)=>{
+      console.log("resul",res.data);
     }).catch((err)=>{
-      console.log(err);
+      console.log("error",err.message);
     })
+
+
+   
 };
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">

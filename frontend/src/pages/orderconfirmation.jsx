@@ -1,6 +1,10 @@
+/* eslint-disable no-unused-vars */
 // OrderConfirmation.jsx
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
+import axios from "../axios.config";
+
+
 import Nav from '../components/nav';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -37,7 +41,7 @@ const OrderConfirmation = () => {
             try {
                 // Fetch selected address
                 const addressResponse = await axios.get(
-                    'http://localhost:8000/api/v2/user/addresses',
+                    '/api/v2/user/addresses',
                     {
                         params: { email: email },
                     }
@@ -57,7 +61,7 @@ const OrderConfirmation = () => {
 
                 // Fetch cart products
                 const cartResponse = await axios.get(
-                    'http://localhost:8000/api/v2/product/cartproducts',
+                    '/api/v2/product/cartproducts',
                     {
                         params: { email: email },
                     }
@@ -133,7 +137,7 @@ const OrderConfirmation = () => {
 
             // Place order
             const response = await axios.post(
-                'http://localhost:8000/api/v2/orders/place-order',
+                '/api/v2/orders/place-order',
                 payload
             );
 
@@ -286,8 +290,7 @@ const OrderConfirmation = () => {
                             <div className='mt-4' style={{ maxWidth: '500px' }}>
                                 <PayPalScriptProvider
                                     options={{
-                                        // own client id
-                                        'client-id': 'Afcd1gD6oHOaJW9UOYN4jKatJKsbds_mhWRfO9nAAVYjfW7WpeiwaNEUgMX97Xb0OTvSz9SO_fWINVrR',
+                                        'client-id': 'AQ9AHGwnIUKME-jEniPL_r7jo6aa_I1ZYokMaHbvPyPiUJMUM1dXo1I7CUFlpVrG6C8e6M3Nyase7Pwd',
                                     }}
                                     >
                                    
